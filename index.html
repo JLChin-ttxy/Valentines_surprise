@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Heart Access</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff4e8a, #ff9a9e);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        text-align: center;
+        color: white;
+    }
+
+    .container {
+        background: rgba(0,0,0,0.3);
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        position: relative;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+    }
+
+    img {
+        width: 200px;
+        border-radius: 15px;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        margin-top: 40px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    button {
+        padding: 15px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background-color: #00e676;
+    }
+
+    #noBtn {
+        background-color: #ff1744;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .success {
+        font-size: 28px;
+        animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0); }
+        100% { transform: scale(1); }
+    }
+</style>
+</head>
+<body>
+
+<div class="container" id="mainBox">
+    <h1>Dear Tiffany ❤️</h1>
+
+    <!-- Replace with your image -->
+    <img src="yourphoto.jpg" alt="Our Photo">
+
+    <h2>Will you be my Valentine? ❤️</h2>
+
+    <div class="buttons">
+        <button id="yesBtn">YES ❤️</button>
+        <button id="noBtn">NO ❌</button>
+    </div>
+</div>
+
+<div class="container hidden" id="successBox">
+    <h1 class="success">YAYYYYY ❤️🥰</h1>
+    <p>You just made me the happiest person alive.</p>
+    <p>Valentine's Date Unlocked 💌</p>
+</div>
+
+<!-- Optional music -->
+<!-- <audio id="bgMusic" src="music.mp3"></audio> -->
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const mainBox = document.getElementById("mainBox");
+    const successBox = document.getElementById("successBox");
+
+    let moved = false;
+
+noBtn.addEventListener("mouseenter", () => {
+
+    // First time only: convert to fixed position
+    if (!moved) {
+        const rect = noBtn.getBoundingClientRect();
+
+        noBtn.style.position = "fixed";
+        noBtn.style.left = rect.left + "px";
+        noBtn.style.top = rect.top + "px";
+
+        moved = true;
+    }
+
+    const maxX = window.innerWidth - noBtn.offsetWidth;
+    const maxY = window.innerHeight - noBtn.offsetHeight;
+
+    const randomX = Math.floor(Math.random() * maxX);
+    const randomY = Math.floor(Math.random() * maxY);
+
+    noBtn.style.left = randomX + "px";
+    noBtn.style.top = randomY + "px";
+});
+    
+
+    yesBtn.addEventListener("click", () => {
+        mainBox.classList.add("hidden");
+        successBox.classList.remove("hidden");
+
+        // Optional music play
+        // document.getElementById("bgMusic").play();
+    });
+</script>
+
+</body>
+</html>
